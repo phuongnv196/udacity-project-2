@@ -27,7 +27,7 @@ def home():
 @app.route("/predict", methods=['POST'])
 def predict():
     try:
-        clf = joblib.load("boston_housing_prediction.joblib")
+        clf = joblib.load("GradientBoostingRegressor.joblib")
     except Exception as e:
         LOG.error("Model loading error: %s", str(e))
         return "Model not loaded"
