@@ -5,8 +5,7 @@ import logging
 import pandas as pd
 import joblib
 
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
 from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
@@ -14,9 +13,9 @@ LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
 
 def scale(payload):
-    """Scales Payload"""
+    """Scale Payload"""
 
-    LOG.info("Scaling Payload: %s payload")
+    LOG.info("Scaling Payload: %s", payload)
     scaler = StandardScaler().fit(payload)
     scaled_adhoc_predict = scaler.transform(payload)
     return scaled_adhoc_predict
@@ -24,9 +23,9 @@ def scale(payload):
 @app.route("/")
 def home():
     html = "<h3>Sklearn Prediction Home, Welcome to service</h3>"
-    return html.format(format)
+    return html
 
-# TO DO:  Log out the prediction value
+# TO DO: Log out the prediction value
 @app.route("/predict", methods=['POST'])
 def predict():
     try:
@@ -36,9 +35,9 @@ def predict():
         return "Model not loaded"
 
     json_payload = request.json
-    LOG.info("JSON payload: %s json_payload")
+    LOG.info("JSON payload: %s", json_payload)
     inference_payload = pd.DataFrame(json_payload)
-    LOG.info("inference payload DataFrame: %s inference_payload")
+    LOG.info("Inference payload DataFrame: %s", inference_payload)
     scaled_payload = scale(inference_payload)
     prediction = list(clf.predict(scaled_payload))
     return jsonify({'prediction': prediction})
