@@ -29,8 +29,8 @@ def predict():
     # Performs an sklearn prediction
     try:
         clf = joblib.load("boston_housing_prediction.joblib")
-    except:
-        LOG.info("JSON payload: %s json_payload")
+    except Exception as e:
+        LOG.error("Model loading error: %s", str(e))
         return "Model not loaded"
 
     json_payload = request.json
