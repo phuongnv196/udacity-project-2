@@ -4,9 +4,7 @@ import logging
 
 import pandas as pd
 import joblib
-
-import sklearn.ensemble.GradientBoostingClassifier
-import sklearn.preprocessing.StandardScaler
+from sklearn.preprocessing import StandardScaler
 
 app = Flask(__name__)
 LOG = create_logger(app)
@@ -29,15 +27,15 @@ def home():
 @app.route("/predict", methods=['POST'])
 def predict():
     try:
-        clf = joblib.load("boston_housing_prediction.joblib")
+        clf = joblib.load("GradientBoostingRegressor.joblib")
     except Exception as e:
         LOG.error("Model loading error: %s", str(e))
         return "Model not loaded"
 
     json_payload = request.json
-    LOG.info("JSON payload: %s", json_payload)
+    LOG.info("JSON payload: %s json_payload")
     inference_payload = pd.DataFrame(json_payload)
-    LOG.info("Inference payload DataFrame: %s", inference_payload)
+    LOG.info("inference payload DataFrame: %s inference_payload")
     scaled_payload = scale(inference_payload)
     prediction = list(clf.predict(scaled_payload))
     return jsonify({'prediction': prediction})
