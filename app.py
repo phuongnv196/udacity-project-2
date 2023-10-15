@@ -5,8 +5,8 @@ import logging
 import pandas as pd
 import joblib
 
-from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
-from sklearn.preprocessing import StandardScaler
+import sklearn.ensemble.GradientBoostingClassifier
+import sklearn.preprocessing.StandardScaler
 
 app = Flask(__name__)
 LOG = create_logger(app)
