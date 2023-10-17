@@ -104,4 +104,103 @@ Azure App Service provides various options to create a new application. In this 
 
    ```bash
     az group create --location westeurope --resource-group phuongnv_rg_02 --tags project=udacity_p_2 environment=dev
-    ```                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    ```                                                                                                                                                                                                                              
+**Deploy Application:**
+
+- Clone the project, we can clone source code to Azure Cloud Shell by using command below: 
+    ```bash
+    git clone git@github.com:phuongnv196/udacity-project-2.git
+    ```
+- Create a Python Virtual Environment to run your application
+
+    ```bash
+    python3 -m venv ~/.udacity-project-2
+    source ~/.udacity-project-2/bin/activate
+  ```
+    ![Install dependencies](screenshots/az-create-inv.png)
+                                  
+
+- Install all dependencies by using **make**
+    ```bash
+    make all
+    ```
+
+    ![Install dependencies](screenshots/az-install-dependencies.png)
+
+- Deploy application into the our resource group
+
+    ```bash
+    az webapp up -n flask-app-phuongnv --resource-group phuongnv_rg_02 --sku FREE
+    ```
+
+- Application will be deployed to azure service
+  **(https://${app-name}.azurewebsites.net)** default port is 443
+
+  ![Azure Service Deployed available](screenshots/az-service-deploy-flask-app.png)
+  
+ - We can find app service in Azure Portal
+  ![App Service in Azure Portal](screenshots/az-flask-app-service.png)
+  
+  - Application was deployed successfully using azure pipelines from Deployment Center
+  ![Azure app service from the Deployment Center](screenshots/az-deployment-center.png)
+
+**Test ML Application:**
+
+- Modify the *'make_predict_azure_app.sh'* script by updating the host name to align with the prediction application that has been deployed.
+![Azure Service Edit Host Name](screenshots/az-mak-predict-azure-edit-app-name.png)
+
+- Run the script *'make_predict_azure_app.sh'* to test the app
+
+    ```bash
+    chmod +x make_predict_azure_app.sh
+
+    ./make_predict_azure_app.sh
+    ```
+- We will get the result: 
+
+    ```
+    Port: 443
+    {"prediction":[20.353731771344123]}
+    ```
+    
+    ![Azure Prediction Result](screenshots/az-make-azure-prediction-result.png)
+
+- Run locust from project folder in Windows by using Windows Power Shell
+
+    ```bash
+    locust
+    ```
+  ![Run locust test](screenshots/az-lotust-start.png)
+
+- We can access to http://localhost:8089 to test application with *locust*
+
+  ![Locust Test Result](screenshots/az-lolust-result.png)
+
+**Logs of Azure Webapp:**
+
+Azure App Service offers the capability to access and view application logs. You can access these logs using Azure CLI commands:
+    ```
+    az webapp log tail --name flask-app-phuongnv --resource-group phuongnv_rg_02
+    ```
+
+![Screenshot of Logs](screenshots/az-flask-app-service-log.png)
+
+### Github Actions
+
+GitHub Actions is a powerful feature provided by GitHub, enabling the creation of comprehensive CI/CD workflows. Within the context of this project, we harness GitHub Actions to execute our Continuous Integration (CI) processes. These processes encompass building, linting, and testing our code, all of which are performed seamlessly through GitHub Actions.
+
+To set up GitHub Actions for your repository, follow these steps:
+
+1. Navigate to the "Actions" tab within your GitHub repository.
+
+2. Select "New Workflow," and opt for the "Python Application Workflow." GitHub has the ability to analyze your code and suggest relevant workflows tailored to your codebase.
+
+![GitHub Actions Setup](screenshots/github-action-python.png)
+
+3. Proceed with the workflow setup process. GitHub Actions will configure a workflow that suits the requirements of your code.
+
+4. Customization of the actions to align with our specific needs is essential. The default action steps are designed to run Python commands. However, given that we employ the *Make* utility for building, testing, and linting our code, we will need to adjust the GitHub Actions configuration accordingly.
+
+By following these steps, you can harness the full potential of GitHub Actions and tailor them to your project's requirements.
+
+![GitHub Actions Python configue](screenshots/github-action-python-configue.png)
