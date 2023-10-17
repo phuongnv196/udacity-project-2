@@ -79,11 +79,13 @@ In this project, We will build a Github repository from scratch and create a sca
 
     We can see the result of script: 
     ```bash
-    ./make_prediction.sh
+    Port: 5000
+    {"prediction":[20.353731771344123]}
     ```      
 
     ![Make prediction result](screenshots/az-make-prediction-result.png)  
 
+### Azure App Service
 
 Azure App Service is a cloud platform service (PaaS) offered by Azure that allows you to easily and quickly deploy web applications, mobile back-ends and RESTful APIs without worrying about the infrastructure. Some of the benefits of using Azure App Service are:
 
