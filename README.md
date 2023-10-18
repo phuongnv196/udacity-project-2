@@ -14,8 +14,7 @@ In this project, We will build a Github repository from scratch and create a sca
 - [Final Project Plan](documents/FinalProjectPlan.xlsx)
 
 ## Architecture Diagram
-
-[Architectural Diagram](screenshots/architecture.png)
+![Architectural Diagram](screenshots/architecture.png)
 
 ## Instructions
 ### Configuring Github
@@ -301,9 +300,7 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
 
 - On the Agent pool management screen that you've just created, click the **New agent** button and follow the instructions to set up the agent.
     ![Create Agent Pool](screenshots/devops-piplines-create-agent-pool-3.png)
-
     ![Create Agent Pool](screenshots/devops-piplines-create-agent-pool-4.png)
-
     ![Create Agent Pool](screenshots/devops-config-agent-pool.png)
 
 - From your project page's left navigation, navigate to **Pipelines** and select **New Pipelines**.
@@ -318,10 +315,8 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
 - In the Configure section, choose **Python to Linux Azure Webapp**:
    - Select the deployed app.
     ![Configure Pipeline](screenshots/devops-create-pipelines-2.png)
-
     ![Configure Pipeline](screenshots/devops-create-pipelines-3.png)
-
-     ![Configure Pipeline](screenshots/devops-create-pipelines-4.png)
+    ![Configure Pipeline](screenshots/devops-create-pipelines-4.png)
      
    - Validate and Review the configuration.
     ![Select Web App Name](screenshots/devops-create-pipelines-5.png)
@@ -329,16 +324,13 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
 
 - In the Review section, change pool to Agent Pool you created before. Validate the Pipeline YAML and click the **Save and Run** button. You might be prompted to save the code into GitHub.
 
-     ![Review Pipeline](screenshots/devops-piplines-edit-yaml.png)
-
+    ![Review Pipeline](screenshots/devops-piplines-edit-yaml.png)
     ![Review Pipeline 2](screenshots/devops-piplines-edit-yaml-2.png)
 
 - Once the pipeline is configured, you can continuously deliver your ML Flask App by running the pipeline.
 
      ![Pipeline Build](screenshots/devops-pipelines-finish-build-job.png)
-
      ![Pipeline Deploy](screenshots/devops-pipelines-finish-deploy-job.png)
-
      ![Pipeline Stage](screenshots/devops-piplines-lists.png)
 
 ## Resource Cleanup
