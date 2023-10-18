@@ -338,5 +338,16 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
      ![Pipeline Build](screenshots/devops-pipelines-finish-build-job.png)
 
      ![Pipeline Deploy](screenshots/devops-pipelines-finish-deploy-job.png)
-     
+
      ![Pipeline Stage](screenshots/devops-piplines-lists.png)
+
+## Resource Cleanup
+To prevent incurring Azure resource charges related to this project, it is advisable to remove the resource group housing the App Service and the App Service Plan.
+
+## Recommendations
+- Develop efficient microservices.
+- Establish useful and actionable alert mechanisms.
+
+## Demonstration
+
+[CI/CD Demo](https://youtu.be)
