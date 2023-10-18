@@ -204,3 +204,120 @@ To set up GitHub Actions for your repository, follow these steps:
 By following these steps, you can harness the full potential of GitHub Actions and tailor them to your project's requirements.
 
 ![GitHub Actions Python configue](screenshots/github-action-python-configue.png)
+
+- Edit the file *.github/workflows/python-app.yml*
+
+    ```yml
+    name: Python application test with Github Actions
+
+    on: [push]
+
+    jobs:
+    build:
+
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+            python-version: 3.8
+        - name: Install dependencies
+        run: |
+            make install
+        - name: Lint with pylint
+        run: |
+            make lint
+        - name: Test with pytest
+        run: |
+            make test
+
+    ```
+
+- Manually trigger the GitHub Action. Upon a successful launch, the results will be displayed below.
+![Github Actions Result](screenshots/github-action-python-success.png)
+
+- Once the workflow is configured, our application will undergo continuous building with each push or pull request made to our main branch.
+
+### Azure DevOps
+
+Azure DevOps offers a comprehensive set of developer services, enabling teams to efficiently plan work, collaborate on code development, and build and deploy applications. This platform fosters a collaborative environment and establishes a cohesive set of processes that unite developers, project managers, and contributors in software development endeavors. With Azure DevOps, organizations can accelerate product development compared to traditional software development approaches.
+
+Here are key components of Azure DevOps:
+
+- **Azure Repos**: It provides Git repositories and Team Foundation Version Control (TFVC) for effective source control of your code.
+
+- **Azure Pipelines**: This service facilitates continuous integration and delivery (CI/CD) by offering build and release capabilities for your applications.
+
+- **Azure Boards**: Equipped with a suite of Agile tools, it supports work planning and tracking, code defect management, and issue tracking using both Kanban and Scrum methodologies.
+
+- **Azure Test Plans**: It furnishes various testing tools, including manual and exploratory testing, as well as continuous testing, to ensure the quality of your applications.
+
+- **Azure Artifacts**: This feature enables teams to share packages from various sources, including Maven, npm, NuGet, and more, whether they are public or private, and to seamlessly integrate package sharing into your development pipelines.
+
+With these offerings, Azure DevOps streamlines the software development lifecycle and empowers teams to enhance collaboration and accelerate the delivery of high-quality applications.
+
+#### Set Up Azure Pipelines for Continuous Delivery
+
+
+
+In this project, we leverage Azure Pipelines for the continuous delivery of the Flask ML App. Follow the steps below to set up your environment:
+
+### Setting up Azure DevOps
+
+- If you don't already have an Azure DevOps account, go to [dev.azure.com](https://dev.azure.com) to sign up for a free account.
+
+- Create an Azure DevOps project:
+   - Create a new project and establish a connection to Azure. The screenshots below illustrate the process:
+   
+     ![Create Azure Project](screenshots/devops-create-project.png)
+
+- After creating the project, navigate to **Project settings** from the left navigation. On the Project Settings page, select **Pipelines > Service connections**, and then click on **New service connection**:
+   
+     ![Azure Project Settings](screenshots/devops-create-service-connection.png)
+
+- In the **New Service Connections** dialog, select **Azure Resource Manager** from the dropdown:
+   
+     ![New Azure Resource Manager](screenshots/devops-create-service-connection-2.png)
+
+- In the **Service Connection** dialogue box:
+   - Select the scope level as **Subscription**.
+   - You might need to log in.
+   - Choose the **Resource Group** of the **Azure Web App** deployed.
+   - Input a valid **Service Connection Name**.
+   - Check the box for **Grant Access Permissions to all pipelines**.
+   - Click **Save**.
+   
+     ![New Azure Resource Manager 2](screenshots/devops-create-service-connection-3.png)
+
+### Setting up Azure Pipeline
+
+- From your project page's left navigation, navigate to **Pipelines** and select **New Pipelines**.
+
+- In the New Pipeline Interface:
+   - Select GitHub as the repository source.
+   - Select your project.
+
+     ![Select GitHub Repo](screenshots/select-github-as-repo.png)
+     ![Select GitHub Repo 2](screenshots/select-repo-github.png)
+
+- In the Configure section, choose **Python to Linux Azure Webapp**:
+   - Select the deployed app.
+   - Validate and Review the configuration.
+
+     ![Configure Pipeline](screenshots/configure-your-pipeline.png)
+     ![Select Azure Subscription](screenshots/select-an-azure-subscription.png)
+     ![Select Web App Name](screenshots/select-web-app-name.png)
+
+- In the Review section, validate the Pipeline YAML and click the **Save and Run** button. You might be prompted to save the code into GitHub.
+
+     ![Review Pipeline](screenshots/review-your-pipeline.png)
+
+- Customize the pipeline according to your needs.
+
+- Once the pipeline is configured, you can continuously deliver your ML Flask App by running the pipeline.
+
+     ![Pipeline Build](screenshots/build-job.png)
+     ![Pipeline Deploy](screenshots/deployment-job.png)
+     ![Pipeline Stage](screenshots/pipeline-build-finish.png)
