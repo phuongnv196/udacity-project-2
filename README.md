@@ -191,15 +191,15 @@ GitHub Actions is a powerful feature provided by GitHub, enabling the creation o
 
 To set up GitHub Actions for your repository, follow these steps:
 
-1. Navigate to the "Actions" tab within your GitHub repository.
+- Navigate to the "Actions" tab within your GitHub repository.
 
-2. Select "New Workflow," and opt for the "Python Application Workflow." GitHub has the ability to analyze your code and suggest relevant workflows tailored to your codebase.
+- Select "New Workflow," and opt for the "Python Application Workflow." GitHub has the ability to analyze your code and suggest relevant workflows tailored to your codebase.
 
-![GitHub Actions Setup](screenshots/github-action-python.png)
+    ![GitHub Actions Setup](screenshots/github-action-python.png)
 
-3. Proceed with the workflow setup process. GitHub Actions will configure a workflow that suits the requirements of your code.
+- Proceed with the workflow setup process. GitHub Actions will configure a workflow that suits the requirements of your code.
 
-4. Customization of the actions to align with our specific needs is essential. The default action steps are designed to run Python commands. However, given that we employ the *Make* utility for building, testing, and linting our code, we will need to adjust the GitHub Actions configuration accordingly.
+- Customization of the actions to align with our specific needs is essential. The default action steps are designed to run Python commands. However, given that we employ the *Make* utility for building, testing, and linting our code, we will need to adjust the GitHub Actions configuration accordingly.
 
 By following these steps, you can harness the full potential of GitHub Actions and tailor them to your project's requirements.
 
@@ -293,31 +293,50 @@ In this project, we leverage Azure Pipelines for the continuous delivery of the 
 
 ### Setting up Azure Pipeline
 
+- First, we need to create an Agent Pool to run jobs for Pipelines, and here we are using Linux to configure the Agent Pool. In **Project Setting** > **Agent Pools** > **Add pool**
+    ![Create Agent Pool](screenshots/devops-piplines-create-agent-pool.png)
+
+- On the **Add agent pool** popup, select the **Pool type** as **Self-hosted**, give the pool a name, and check the "**Grant access permission to all pipelines**" checkbox. Then, click the "**Create**" button.
+    ![Create Agent Pool](screenshots/devops-piplines-create-agent-pool-2.png)
+
+- On the Agent pool management screen that you've just created, click the **New agent** button and follow the instructions to set up the agent.
+    ![Create Agent Pool](screenshots/devops-piplines-create-agent-pool-3.png)
+
+    ![Create Agent Pool](screenshots/devops-piplines-create-agent-pool-4.png)
+
+    ![Create Agent Pool](screenshots/devops-config-agent-pool.png)
+
 - From your project page's left navigation, navigate to **Pipelines** and select **New Pipelines**.
 
 - In the New Pipeline Interface:
    - Select GitHub as the repository source.
-   - Select your project.
+    ![Select GitHub Repo](screenshots/devops-create-pipelines.png)
 
-     ![Select GitHub Repo](screenshots/select-github-as-repo.png)
-     ![Select GitHub Repo 2](screenshots/select-repo-github.png)
+   - Select your project.
+     ![Select GitHub Repo 2](screenshots/devops-create-pipelines-1.png)
 
 - In the Configure section, choose **Python to Linux Azure Webapp**:
    - Select the deployed app.
+    ![Configure Pipeline](screenshots/devops-create-pipelines-2.png)
+
+    ![Configure Pipeline](screenshots/devops-create-pipelines-3.png)
+
+     ![Configure Pipeline](screenshots/devops-create-pipelines-4.png)
+     
    - Validate and Review the configuration.
+    ![Select Web App Name](screenshots/devops-create-pipelines-5.png)
+     
 
-     ![Configure Pipeline](screenshots/configure-your-pipeline.png)
-     ![Select Azure Subscription](screenshots/select-an-azure-subscription.png)
-     ![Select Web App Name](screenshots/select-web-app-name.png)
+- In the Review section, change pool to Agent Pool you created before. Validate the Pipeline YAML and click the **Save and Run** button. You might be prompted to save the code into GitHub.
 
-- In the Review section, validate the Pipeline YAML and click the **Save and Run** button. You might be prompted to save the code into GitHub.
+     ![Review Pipeline](screenshots/devops-piplines-edit-yaml.png)
 
-     ![Review Pipeline](screenshots/review-your-pipeline.png)
-
-- Customize the pipeline according to your needs.
+    ![Review Pipeline 2](screenshots/devops-piplines-edit-yaml-2.png)
 
 - Once the pipeline is configured, you can continuously deliver your ML Flask App by running the pipeline.
 
-     ![Pipeline Build](screenshots/build-job.png)
-     ![Pipeline Deploy](screenshots/deployment-job.png)
-     ![Pipeline Stage](screenshots/pipeline-build-finish.png)
+     ![Pipeline Build](screenshots/devops-pipelines-finish-build-job.png)
+
+     ![Pipeline Deploy](screenshots/devops-pipelines-finish-deploy-job.png)
+     
+     ![Pipeline Stage](screenshots/devops-piplines-lists.png)
